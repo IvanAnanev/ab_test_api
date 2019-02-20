@@ -1,0 +1,18 @@
+<h1>Show Experiment</h1>
+
+<ul>
+
+  <li>
+    <strong>Key:</strong>
+    <%= @experiment.key %>
+  </li>
+
+  <li>
+    <strong>Count cache:</strong>
+    <%= @experiment.count_cache %>
+  </li>
+
+</ul>
+
+<span><%= link "Edit", to: Routes.experiment_path(@conn, :edit, @experiment) %></span>
+<span><%= link "Back", to: Routes.experiment_path(@conn, :index) %></span>
