@@ -1,11 +1,13 @@
 defmodule AbTestApi.ABTests.Experiment do
   use Ecto.Schema
   import Ecto.Changeset
-
+  alias AbTestApi.ABTests.Option
 
   schema "experiments" do
     field :count_cache, :integer
     field :key, :string
+
+    has_many :options, Option, on_delete: :delete_all
 
     timestamps()
   end
