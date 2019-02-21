@@ -35,7 +35,7 @@ defmodule AbTestApi.ABTests do
       ** (Ecto.NoResultsError)
 
   """
-  def get_experiment!(id), do: Repo.get!(Experiment, id)
+  def get_experiment!(id), do: Repo.get!(Experiment, id) |> Repo.preload([:options])
 
   @doc """
   Creates a experiment.

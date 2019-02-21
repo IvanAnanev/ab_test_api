@@ -2,7 +2,7 @@ defmodule AbTestApiWeb.ExperimentController do
   use AbTestApiWeb, :controller
 
   alias AbTestApi.ABTests
-  alias AbTestApi.ABTests.Experiment
+  alias AbTestApi.ABTests.{ Experiment, Option }
 
   def index(conn, _params) do
     experiments = ABTests.list_experiments()
@@ -10,7 +10,10 @@ defmodule AbTestApiWeb.ExperimentController do
   end
 
   def new(conn, _params) do
-    changeset = ABTests.change_experiment(%Experiment{})
+    changeset = ABTests.change_experiment(%Experiment{key: "new experiment", options: [
+      %Option{value: "some_value_1", percentage: 50},
+      %Option{value: "some_value_2", percentage: 50}
+    ]})
     render(conn, "new.html", changeset: changeset)
   end
 
@@ -29,26 +32,6 @@ defmodule AbTestApiWeb.ExperimentController do
   def show(conn, %{"id" => id}) do
     experiment = ABTests.get_experiment!(id)
     render(conn, "show.html", experiment: experiment)
-  end
-
-  def edit(conn, %{"id" => id}) do
-    experiment = ABTests.get_experiment!(id)
-    changeset = ABTests.change_experiment(experiment)
-    render(conn, "edit.html", experiment: experiment, changeset: changeset)
-  end
-
-  def update(conn, %{"id" => id, "experiment" => experiment_params}) do
-    experiment = ABTests.get_experiment!(id)
-
-    case ABTests.update_experiment(experiment, experiment_params) do
-      {:ok, experiment} ->
-        conn
-        |> put_flash(:info, "Experiment updated successfully.")
-        |> redirect(to: Routes.experiment_path(conn, :show, experiment))
-
-      {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "edit.html", experiment: experiment, changeset: changeset)
-    end
   end
 
   def delete(conn, %{"id" => id}) do

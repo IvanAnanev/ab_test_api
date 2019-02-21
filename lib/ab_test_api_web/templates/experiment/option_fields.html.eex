@@ -1,0 +1,11 @@
+<%= inputs_for @f, :options, fn opt -> %>
+  <div class="form-group">
+    <%= label opt, :value, class: "control-label" %>
+    <%= text_input opt, :value, class: "form-control" %>
+    <%= error_tag opt, :value %>
+
+    <%= label opt, :percentage, class: "control-label" %>
+    <%= number_input opt, :percentage, class: "form-control", min: 1, max: 99 %>
+    <%= error_tag opt, :percentage %>
+  </div>
+<% end %>

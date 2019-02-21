@@ -17,7 +17,7 @@ defmodule AbTestApiWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :index
-    resources "/experiments", ExperimentController
+    resources "/experiments", ExperimentController, only: [:new, :create, :show, :delete, :index]
   end
 
   # Other scopes may use custom stacks.

@@ -15,3 +15,18 @@ import "phoenix_html"
 //
 // Local files can be imported directly using relative paths, for example:
 // import socket from "./socket"
+
+const addOptionAnchor = document.getElementById("add_option");
+if (addOptionAnchor) {
+  addOptionAnchor.addEventListener("click", (e) => {
+    e.preventDefault();
+
+    const template = addOptionAnchor.dataset.template;
+    const time =new Date().getTime();
+    const uniq_template = template.replace(/\[0\]/g, `[${time}]`).replace(/_0_/g, `_${time}_`);
+    let div = document.createElement("div");
+    div.innerHTML = uniq_template.trim();
+
+    addOptionAnchor.parentNode.insertBefore(div.childNodes[0], addOptionAnchor);
+  })
+}

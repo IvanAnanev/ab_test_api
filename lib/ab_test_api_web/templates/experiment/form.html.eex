@@ -2,6 +2,9 @@
   <%= if @changeset.action do %>
     <div class="alert alert-danger">
       <p>Oops, something went wrong! Please check the errors below.</p>
+      <%= if @changeset.errors[:base] do %>
+        <p><%= error_tag @changeset, :base %></p>
+      <% end  %>
     </div>
   <% end %>
 
@@ -9,9 +12,19 @@
   <%= text_input f, :key %>
   <%= error_tag f, :key %>
 
-  <%= label f, :count_cache %>
-  <%= number_input f, :count_cache %>
-  <%= error_tag f, :count_cache %>
+  <%= inputs_for f, :options, fn opt -> %>
+    <div class="form-group">
+      <%= label opt, :value, class: "control-label" %>
+      <%= text_input opt, :value, class: "form-control" %>
+      <%= error_tag opt, :value %>
+
+      <%= label opt, :percentage, class: "control-label" %>
+      <%= number_input opt, :percentage, class: "form-control", min: 1, max: 99 %>
+      <%= error_tag opt, :percentage %>
+    </div>
+  <% end %>
+
+  <%= link_add_option %>
 
   <div>
     <%= submit "Save" %>

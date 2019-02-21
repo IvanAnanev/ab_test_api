@@ -8,11 +8,19 @@
   </li>
 
   <li>
-    <strong>Count cache:</strong>
-    <%= @experiment.count_cache %>
+    <strong>Options:</strong>
+    <ul>
+      <%= for option <- @experiment.options do %>
+          <li>
+            <strong>value:</strong>
+            <%= option.value %>
+            <strong>percentage:</strong>
+            <%= option.percentage %>
+          </li>
+      <% end %>
+    </ul>
   </li>
 
 </ul>
 
-<span><%= link "Edit", to: Routes.experiment_path(@conn, :edit, @experiment) %></span>
 <span><%= link "Back", to: Routes.experiment_path(@conn, :index) %></span>

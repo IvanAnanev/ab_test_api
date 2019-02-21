@@ -17,7 +17,8 @@ defmodule AbTestApi.ABTests.Option do
   @doc false
   def changeset(option, attrs) do
     option
-    |> cast(attrs, [:value, :percentage, :count_cache])
-    |> validate_required([:value, :percentage, :count_cache])
+    |> cast(attrs, [:value, :percentage])
+    |> validate_required([:value, :percentage])
+    |> validate_inclusion(:percentage, 1..99)
   end
 end

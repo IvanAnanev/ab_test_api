@@ -4,7 +4,6 @@
   <thead>
     <tr>
       <th>Key</th>
-      <th>Count cache</th>
 
       <th></th>
     </tr>
@@ -13,11 +12,9 @@
 <%= for experiment <- @experiments do %>
     <tr>
       <td><%= experiment.key %></td>
-      <td><%= experiment.count_cache %></td>
 
       <td>
         <%= link "Show", to: Routes.experiment_path(@conn, :show, experiment) %>
-        <%= link "Edit", to: Routes.experiment_path(@conn, :edit, experiment) %>
         <%= link "Delete", to: Routes.experiment_path(@conn, :delete, experiment), method: :delete, data: [confirm: "Are you sure?"] %>
       </td>
     </tr>
