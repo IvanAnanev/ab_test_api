@@ -11,8 +11,8 @@ config :logger, level: :warn
 
 # Configure your database
 config :ab_test_api, AbTestApi.Repo,
-  username: "postgres",
-  password: "postgres",
+  # username: "postgres",
+  # password: "postgres",
   database: "ab_test_api_test",
   hostname: "localhost",
   pool: Ecto.Adapters.SQL.Sandbox

@@ -9,6 +9,7 @@ defmodule AbTestApi.ABTests.Experiment do
     field :key, :string
 
     has_many :options, Option
+    has_many :devices, through: [:options, :devices]
 
     timestamps()
   end

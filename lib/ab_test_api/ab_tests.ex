@@ -6,7 +6,7 @@ defmodule AbTestApi.ABTests do
   import Ecto.Query, warn: false
   alias AbTestApi.Repo
 
-  alias AbTestApi.ABTests.Experiment
+  alias AbTestApi.ABTests.{ Experiment, Option, Device }
 
   @doc """
   Returns the list of experiments.
