@@ -5,7 +5,7 @@ defmodule AbTestApi.ABTests.Experiment do
   require Integer
 
   schema "experiments" do
-    field :count_cache, :integer
+    field :devices_count, :integer
     field :key, :string
 
     has_many :options, Option
@@ -40,5 +40,12 @@ defmodule AbTestApi.ABTests.Experiment do
   @odd_sum 99
   defp percentage_sum_valid?(options) do
     Enum.reduce(options, 0, fn(x, acc) -> x.percentage + acc end) == @odd_sum
+  end
+
+  @doc false
+  def devices_count_changeset(experiment, attrs) do
+    experiment
+    |> cast(attrs, [:devices_count])
+    |> validate_required([:devices_count])
   end
 end

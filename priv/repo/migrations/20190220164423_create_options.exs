@@ -4,8 +4,8 @@ defmodule AbTestApi.Repo.Migrations.CreateOptions do
   def change do
     create table(:options) do
       add :value, :string
-      add :percentage, :integer
-      add :count_cache, :integer
+      add :percentage, :integer, null: false
+      add :devices_count, :integer, default: 0, null: false
       add :experiment_id, references(:experiments, on_delete: :delete_all)
 
       timestamps()

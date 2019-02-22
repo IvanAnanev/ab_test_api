@@ -6,7 +6,7 @@ defmodule AbTestApi.ABTests do
   import Ecto.Query, warn: false
   alias AbTestApi.Repo
 
-  alias AbTestApi.ABTests.{ Experiment, Option, Device }
+  alias AbTestApi.ABTests.{ Experiment, Option, Device, DeviceOption }
 
   @doc """
   Returns the list of experiments.
@@ -100,5 +100,60 @@ defmodule AbTestApi.ABTests do
   """
   def change_experiment(%Experiment{} = experiment) do
     Experiment.changeset(experiment, %{})
+  end
+
+  @doc """
+  Creates a device.
+
+  ## Examples
+
+      iex> create_device(%{token: value})
+      {:ok, %Device{}}
+
+      iex> create_device(%{token: bad_value})
+      {:error, %Ecto.Changeset{}}
+  """
+  def create_device(attrs \\ %{}) do
+    %Device{}
+    |> Device.changeset(attrs)
+    |> Repo.insert()
+  end
+
+  @doc """
+  Creates a device_option.
+
+  ## Examples
+
+      iex> create_device_option(device, option)
+      {:ok, %DeviceOption{}}
+  """
+
+  def create_device_option(device, option) do
+    %DeviceOption{device: device, option: option} |> Repo.insert()
+  end
+
+  @doc """
+  Cache devices_count field.
+
+  ## Examples
+
+      iex> cache_devices_count(expirement)
+      {:ok, %Expirement{}}
+
+      iex> cache_devices_count(option)
+      {:ok, %Option{}}
+  """
+
+  def cache_devices_count(%module{} = record) when module in [Experiment, Option] do
+    count = count_devices(record)
+
+    module.devices_count_changeset(record, %{devices_count: count})
+    |> Repo.update()
+  end
+
+  defp count_devices(record) do
+    record
+    |> Ecto.assoc(:devices)
+    |> Repo.aggregate(:count, :id)
   end
 end

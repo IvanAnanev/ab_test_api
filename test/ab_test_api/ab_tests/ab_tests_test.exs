@@ -6,9 +6,9 @@ defmodule AbTestApi.ABTestsTest do
   describe "experiments" do
     alias AbTestApi.ABTests.Experiment
 
-    @valid_attrs %{count_cache: 42, key: "some key"}
-    @update_attrs %{count_cache: 43, key: "some updated key"}
-    @invalid_attrs %{count_cache: nil, key: nil}
+    @valid_attrs %{devices_count: 42, key: "some key"}
+    @update_attrs %{devices_count: 43, key: "some updated key"}
+    @invalid_attrs %{devices_count: nil, key: nil}
 
     def experiment_fixture(attrs \\ %{}) do
       {:ok, experiment} =
@@ -31,7 +31,7 @@ defmodule AbTestApi.ABTestsTest do
 
     test "create_experiment/1 with valid data creates a experiment" do
       assert {:ok, %Experiment{} = experiment} = ABTests.create_experiment(@valid_attrs)
-      assert experiment.count_cache == 42
+      assert experiment.devices_count == 42
       assert experiment.key == "some key"
     end
 
@@ -42,7 +42,7 @@ defmodule AbTestApi.ABTestsTest do
     test "update_experiment/2 with valid data updates the experiment" do
       experiment = experiment_fixture()
       assert {:ok, %Experiment{} = experiment} = ABTests.update_experiment(experiment, @update_attrs)
-      assert experiment.count_cache == 43
+      assert experiment.devices_count == 43
       assert experiment.key == "some updated key"
     end
 

@@ -3,9 +3,9 @@ defmodule AbTestApiWeb.ExperimentControllerTest do
 
   alias AbTestApi.ABTests
 
-  @create_attrs %{count_cache: 42, key: "some key"}
-  @update_attrs %{count_cache: 43, key: "some updated key"}
-  @invalid_attrs %{count_cache: nil, key: nil}
+  @create_attrs %{devices_count: 42, key: "some key"}
+  @update_attrs %{devices_count: 43, key: "some updated key"}
+  @invalid_attrs %{devices_count: nil, key: nil}
 
   def fixture(:experiment) do
     {:ok, experiment} = ABTests.create_experiment(@create_attrs)

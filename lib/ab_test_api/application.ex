@@ -11,7 +11,8 @@ defmodule AbTestApi.Application do
       # Start the Ecto repository
       AbTestApi.Repo,
       # Start the endpoint when the application starts
-      AbTestApiWeb.Endpoint
+      AbTestApiWeb.Endpoint,
+      AbTestApi.Distributor
       # Starts a worker by calling: AbTestApi.Worker.start_link(arg)
       # {AbTestApi.Worker, arg},
     ]

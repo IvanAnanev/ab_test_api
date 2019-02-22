@@ -5,7 +5,7 @@ defmodule AbTestApi.ABTests.Option do
 
 
   schema "options" do
-    field :count_cache, :integer
+    field :devices_count, :integer
     field :percentage, :integer
     field :value, :string
     # field :experiment_id, :id
@@ -22,5 +22,12 @@ defmodule AbTestApi.ABTests.Option do
     |> cast(attrs, [:value, :percentage])
     |> validate_required([:value, :percentage])
     |> validate_inclusion(:percentage, 1..99)
+  end
+
+  @doc false
+  def devices_count_changeset(experiment, attrs) do
+    experiment
+    |> cast(attrs, [:devices_count])
+    |> validate_required([:devices_count])
   end
 end
