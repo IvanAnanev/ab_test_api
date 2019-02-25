@@ -103,6 +103,20 @@ defmodule AbTestApi.ABTests do
   end
 
   @doc """
+  Preload options for experiment
+
+  ## Examples
+
+      iex> preload_options_for_experiment(experiment)
+      %Experiment{key: "some_key", optins: [...%Option{}]}
+
+  """
+
+  def preload_options_for_experiment(experiment) do
+    experiment |> Repo.preload(:options)
+  end
+
+  @doc """
   Creates a device.
 
   ## Examples
@@ -117,6 +131,54 @@ defmodule AbTestApi.ABTests do
     %Device{}
     |> Device.changeset(attrs)
     |> Repo.insert()
+  end
+
+  @doc """
+  Find or creates a device by token.
+
+  ## Examples
+
+      iex> find_or_create_device_by_token(token)
+      %Device{}
+  """
+
+  def find_or_create_device_by_token(token) do
+    case Repo.get_by(Device, token: token) do
+      nil ->
+        {:ok, device} = create_device(%{token: token})
+        device
+      device -> device
+    end
+  end
+
+  @doc """
+  List experiments not distributed for device.
+
+  ## Examples
+
+      iex> experiments_not_distrubuted_for_device(device)
+      [...%Experiment{}]
+  """
+
+  def experiments_not_distrubuted_for_device(device) do
+    experiments_all = Repo.all(Experiment)
+    %{experiments: device_experiments} = Repo.preload(device, :experiments)
+
+    Enum.filter(experiments_all, fn e -> not Enum.member?(device_experiments, e) end)
+  end
+
+  @doc """
+  List distributed Experiment Option for device.
+
+  ## Examples
+
+      iex> experiments_not_distrubuted_for_device(device)
+      [...%Experiment{}]
+  """
+
+  def distributed_experiment_options_for_device(device) do
+    %{options: options} = Repo.preload(device, [options: :experiment])
+    options
   end
 
   @doc """

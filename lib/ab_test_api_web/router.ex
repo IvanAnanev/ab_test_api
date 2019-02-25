@@ -21,7 +21,9 @@ defmodule AbTestApiWeb.Router do
   end
 
   # Other scopes may use custom stacks.
-  # scope "/api", AbTestApiWeb do
-  #   pipe_through :api
-  # end
+  scope "/api", AbTestApiWeb.Api, as: :api do
+    pipe_through :api
+
+    resources "/experiments", ExperimentController, only: [:index]
+  end
 end

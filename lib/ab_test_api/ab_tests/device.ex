@@ -8,7 +8,7 @@ defmodule AbTestApi.ABTests.Device do
 
     has_many :device_options, DeviceOption
     has_many :options, through: [:device_options, :option]
-    has_many :expirements, through: [:options, :expirement]
+    has_many :experiments, through: [:options, :experiment]
 
     timestamps()
   end
