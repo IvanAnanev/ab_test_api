@@ -11,6 +11,6 @@ defmodule AbTestApi.Repo.Migrations.CreateDeviceOptions do
 
     create index(:device_options, [:device_id])
     create index(:device_options, [:option_id])
-    create unique_index(:device_options, [:device_id, :option_id], :uniq_device_option)
+    create unique_index(:device_options, [:device_id, :option_id], name: :uniq_device_option)
   end
 end
