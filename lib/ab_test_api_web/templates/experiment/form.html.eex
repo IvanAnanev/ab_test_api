@@ -24,7 +24,7 @@
     </div>
   <% end %>
 
-  <%= link_add_option %>
+  <%= link_add_option() %>
 
   <div>
     <%= submit "Save" %>

@@ -1,26 +1,20 @@
-<h1>Show Experiment</h1>
-
-<ul>
-
-  <li>
-    <strong>Key:</strong>
-    <%= @experiment.key %>
-  </li>
-
-  <li>
-    <strong>Options:</strong>
-    <ul>
-      <%= for option <- @experiment.options do %>
-          <li>
-            <strong>value:</strong>
-            <%= option.value %>
-            <strong>percentage:</strong>
-            <%= option.percentage %>
-          </li>
-      <% end %>
-    </ul>
-  </li>
-
-</ul>
+<h1>Show Experiment key:<%= @experiment.key %></h1>
 
 <span><%= link "Back", to: Routes.experiment_path(@conn, :index) %></span>
+
+<section class="row">
+  <%= for option <- @experiment.options do %>
+    <article class="column">
+      <h2>Option value: <%= option.value %></h2>
+      <h4>percentage: <%= option.percentage %></h4>
+      <h4>devices count: <%= option.devices_count %></h4>
+      <h4>Devices:</h4>
+      <ul>
+        <%= for device <- option.devices do %>
+          <li><%= device.token %></li>
+        <% end %>
+      </ul>
+    </article>
+  <% end %>
+</section>
+

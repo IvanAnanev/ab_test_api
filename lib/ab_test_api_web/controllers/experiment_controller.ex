@@ -30,7 +30,7 @@ defmodule AbTestApiWeb.ExperimentController do
   end
 
   def show(conn, %{"id" => id}) do
-    experiment = ABTests.get_experiment!(id)
+    experiment = ABTests.get_experiment_with_devices!(id)
     render(conn, "show.html", experiment: experiment)
   end
 

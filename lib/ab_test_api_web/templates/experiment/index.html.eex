@@ -15,7 +15,6 @@
 
       <td>
         <%= link "Show", to: Routes.experiment_path(@conn, :show, experiment) %>
-        <%= link "Delete", to: Routes.experiment_path(@conn, :delete, experiment), method: :delete, data: [confirm: "Are you sure?"] %>
       </td>
     </tr>
 <% end %>

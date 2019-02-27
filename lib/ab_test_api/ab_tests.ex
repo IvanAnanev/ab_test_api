@@ -37,6 +37,9 @@ defmodule AbTestApi.ABTests do
   """
   def get_experiment!(id), do: Repo.get!(Experiment, id) |> Repo.preload([:options])
 
+  def get_experiment_with_devices!(id), do: Repo.get!(Experiment, id) |> Repo.preload([options: :devices])
+
+
   @doc """
   Creates a experiment.
 
