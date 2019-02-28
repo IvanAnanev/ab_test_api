@@ -163,11 +163,18 @@ defmodule AbTestApi.ABTests do
       [...%Experiment{}]
   """
 
-  def experiments_not_distrubuted_for_device(device) do
-    experiments_all = Repo.all(Experiment)
-    %{experiments: device_experiments} = Repo.preload(device, :experiments)
+  def experiments_not_distrubuted_for_device(%{id: id} = _device) do
+    ex_query = from d in Device,
+      where: [id: ^id],
+      join: e in assoc(d, :experiments),
+      select: e.id
+    ex_ids = Repo.all(ex_query)
 
-    Enum.filter(experiments_all, fn e -> not Enum.member?(device_experiments, e) end)
+    query = from e in Experiment,
+      where: e.id not in ^ex_ids,
+      preload: :options
+
+    Repo.all(query)
   end
 
   @doc """

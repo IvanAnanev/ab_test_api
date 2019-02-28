@@ -16,7 +16,6 @@ defmodule AbTestApiWeb.Api.ExperimentController do
         device = ABTests.find_or_create_device_by_token(token)
 
         ABTests.experiments_not_distrubuted_for_device(device)
-        |> Enum.map(fn(expirement) -> ABTests.preload_options_for_experiment(expirement) end)
         |> Enum.each(fn(expirement) -> Distributor.call(expirement, device) end)
 
         render(conn, "index.json", options: ABTests.distributed_experiment_options_for_device(device))
