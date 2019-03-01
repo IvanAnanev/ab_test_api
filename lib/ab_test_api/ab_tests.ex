@@ -106,20 +106,6 @@ defmodule AbTestApi.ABTests do
   end
 
   @doc """
-  Preload options for experiment
-
-  ## Examples
-
-      iex> preload_options_for_experiment(experiment)
-      %Experiment{key: "some_key", optins: [...%Option{}]}
-
-  """
-
-  def preload_options_for_experiment(experiment) do
-    experiment |> Repo.preload(:options)
-  end
-
-  @doc """
   Creates a device.
 
   ## Examples
