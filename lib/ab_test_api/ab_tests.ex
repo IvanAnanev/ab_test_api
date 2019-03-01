@@ -150,14 +150,23 @@ defmodule AbTestApi.ABTests do
   """
 
   def experiments_not_distrubuted_for_device(%{id: id} = _device) do
-    ex_query = from d in Device,
-      where: [id: ^id],
-      join: e in assoc(d, :experiments),
-      select: e.id
-    ex_ids = Repo.all(ex_query)
+    # ex_query = from d in Device,
+    #   where: [id: ^id],
+    #   join: e in assoc(d, :experiments),
+    #   select: e.id
+    # ex_ids = Repo.all(ex_query)
+
+    # query = from e in Experiment,
+    #   where: e.id not in ^ex_ids,
+    #   preload: :options
+
+    supplier_query = from e in Experiment,
+      distinct: e.id,
+      left_join: d in assoc(e, :devices),
+      where: d.id == ^id
 
     query = from e in Experiment,
-      where: e.id not in ^ex_ids,
+      except: ^supplier_query,
       preload: :options
 
     Repo.all(query)
