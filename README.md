@@ -1,5 +1,9 @@
 # AbTestApi
 
+deployed to gigalixir
+
+* <https://luxurious-masculine-neonbluehermitcrab.gigalixirapp.com/experiments>
+
 ## Install
 
 To start your Phoenix server:
